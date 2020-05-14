@@ -33,4 +33,25 @@ class SocialUserTest extends  TestCase {
     }
 
 
+
+    public function test_resgistration_api() {
+
+        $options = [
+            'json' => [
+                "user_name"         =>  "unit test",
+                "email_address"     =>  "unittest@gmail.com",
+                "password"          =>  '123456',
+                "device_type"       =>  "web"
+            ]
+        
+        ]; 
+
+
+        $response = $this->client->post('SocialUser/user_registration', $options);
+        $response_array = json_decode($response->getBody(), true);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(1, $response_array['respCode']);
+    }
+
+
 }
